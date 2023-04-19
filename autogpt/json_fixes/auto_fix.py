@@ -22,12 +22,8 @@ def fix_json(json_string: str, schema: str) -> str:
     function_string = "def fix_json(json_string: str, schema:str=None) -> str:"
     args = [f"'''{json_string}'''", f"'''{schema}'''"]
     description_string = (
-        "This function takes a JSON string and ensures that it"
-        " is parseable and fully compliant with the provided schema. If an object"
-        " or field specified in the schema isn't contained within the correct JSON,"
-        " it is omitted. The function also escapes any double quotes within JSON"
-        " string values to ensure that they are valid. If the JSON string contains"
-        " any None or NaN values, they are replaced with null before being parsed."
+        "此函数接受一个JSON字符串，并确保是由Python json.loads解析的，并且完全符合所提供的模式。如果在模式中指定的对象或字段没有包含在正确的JSON中，则会忽略它。该函数还转义JSON"
+        "字符串值中的任何双引号，以确保它们是有效的。如果JSON字符串包含任何None或NaN值，则在解析之前会将其替换为null。"
     )
 
     # If it doesn't already start with a "`", add one:
@@ -36,11 +32,11 @@ def fix_json(json_string: str, schema: str) -> str:
     result_string = call_ai_function(
         function_string, args, description_string, model=CFG.fast_llm_model
     )
-    logger.debug("------------ JSON FIX ATTEMPT ---------------")
-    logger.debug(f"Original JSON: {json_string}")
+    logger.debug("------------ 尝试修复JSON---------------")
+    logger.debug(f"原始 JSON: {json_string}")
     logger.debug("-----------")
-    logger.debug(f"Fixed JSON: {result_string}")
-    logger.debug("----------- END OF FIX ATTEMPT ----------------")
+    logger.debug(f"修复后 JSON: {result_string}")
+    logger.debug("----------- JSON修复结束 ----------------")
 
     try:
         json.loads(result_string)  # just check the validity

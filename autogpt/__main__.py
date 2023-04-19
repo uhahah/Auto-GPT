@@ -25,16 +25,16 @@ def main() -> None:
     next_action_count = 0
     # Make a constant:
     triggering_prompt = (
-        "Determine which next command to use, and respond using the"
-        " format specified above:"
+        "确定要使用的下一个命令，并使用"
+        "上面指定的格式："
     )
     # Initialize memory and make sure it is empty.
     # this is particularly important for indexing and referencing pinecone memory
     memory = get_memory(cfg, init=True)
     logger.typewriter_log(
-        f"Using memory of type:", Fore.GREEN, f"{memory.__class__.__name__}"
+        f"使用内存的类型：", Fore.GREEN, f"{memory.__class__.__name__}"
     )
-    logger.typewriter_log(f"Using Browser:", Fore.GREEN, cfg.selenium_web_browser)
+    logger.typewriter_log(f"使用浏览器：", Fore.GREEN, cfg.selenium_web_browser)
     agent = Agent(
         ai_name=ai_name,
         memory=memory,

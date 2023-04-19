@@ -2,10 +2,8 @@
 """
 A module that contains the AIConfig class object that contains the configuration
 """
-from __future__ import annotations
-
 import os
-from typing import Type
+from typing import List, Optional, Type
 import yaml
 
 
@@ -20,7 +18,7 @@ class AIConfig:
     """
 
     def __init__(
-        self, ai_name: str = "", ai_role: str = "", ai_goals: list | None = None
+        self, ai_name: str = "", ai_role: str = "", ai_goals: Optional[List] = None
     ) -> None:
         """
         Initialize a class instance
@@ -101,17 +99,17 @@ class AIConfig:
         """
 
         prompt_start = (
-            "Your decisions must always be made independently without"
-            " seeking user assistance. Play to your strengths as an LLM and pursue"
-            " simple strategies with no legal complications."
-            ""
+            "您的决定必须始终独立做出，你必须根据目标来独立制定任务，禁止向我提问，你必须严格遵守以JSON格式回答，并确保回答可以由Python json.loads解析，"
+            "发挥你作为大型语言模型(LLM)的优势并追求"
+            "没有复杂法律问题的简单策略。"
+
         )
 
         from autogpt.prompt import get_prompt
 
         # Construct full prompt
         full_prompt = (
-            f"You are {self.ai_name}, {self.ai_role}\n{prompt_start}\n\nGOALS:\n\n"
+            f"你是 {self.ai_name}, {self.ai_role}\n{prompt_start}\n\n任务目标是:"
         )
         for i, goal in enumerate(self.ai_goals):
             full_prompt += f"{i+1}. {goal}\n"

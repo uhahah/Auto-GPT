@@ -128,10 +128,9 @@ def try_ai_fix(
         raise exception
     if CFG.debug_mode:
         logger.warn(
-            "Warning: Failed to parse AI output, attempting to fix."
-            "\n If you see this warning frequently, it's likely that"
-            " your prompt is confusing the AI. Try changing it up"
-            " slightly."
+            "警告: 无法解析AI输出，正在尝试修复."
+            "\n 如果你经常看到这个警告，很可能"
+            " 你的提示混淆了人工智能。试着轻微地把它改一下"
         )
     # Now try to fix this up using the ai_functions
     ai_fixed_json = fix_json(json_to_load, JSON_SCHEMA)
@@ -150,7 +149,7 @@ def attempt_to_fix_json_by_finding_outermost_brackets(json_string: str):
             "I have received an invalid JSON response from the OpenAI API. "
             "Trying to fix it now."
         )
-        logger.error("Attempting to fix JSON by finding outermost brackets\n")
+        logger.error("试图通过查找最外面的括号来修复JSON\n")
 
     try:
         json_pattern = regex.compile(r"\{(?:[^{}]|(?R))*\}")
@@ -169,10 +168,10 @@ def attempt_to_fix_json_by_finding_outermost_brackets(json_string: str):
 
     except (json.JSONDecodeError, ValueError):
         if CFG.debug_mode:
-            logger.error(f"Error: Invalid JSON: {json_string}\n")
+            logger.error(f"Error: 无效 JSON: {json_string}\n")
         if CFG.speak_mode:
             say_text("Didn't work. I will have to ignore this response then.")
-        logger.error("Error: Invalid JSON, setting it to empty JSON now.\n")
+        logger.error("Error: 无效 JSON, 现在把JSON设置为空.\n")
         json_string = {}
 
     return fix_and_parse_json(json_string)

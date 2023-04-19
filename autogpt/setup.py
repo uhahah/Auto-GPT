@@ -14,45 +14,43 @@ def prompt_user() -> AIConfig:
     ai_name = ""
     # Construct the prompt
     logger.typewriter_log(
-        "Welcome to Auto-GPT! ",
+        "欢迎来到Auto-GPT! ",
         Fore.GREEN,
-        "Enter the name of your AI and its role below. Entering nothing will load"
-        " defaults.",
+        "在下方输入您的 AI 的名称及其角色。 什么都不输入会加载"
+        " 默认.",
         speak_text=True,
     )
 
     # Get AI Name from User
     logger.typewriter_log(
-        "Name your AI: ", Fore.GREEN, "For example, 'Entrepreneur-GPT'"
+        "你的AI名字: ", Fore.GREEN, "例如, '超级-GPT'"
     )
-    ai_name = utils.clean_input("AI Name: ")
+    ai_name = utils.clean_input("AI名字: ")
     if ai_name == "":
-        ai_name = "Entrepreneur-GPT"
+        ai_name = "超级-GPT"
 
     logger.typewriter_log(
-        f"{ai_name} here!", Fore.LIGHTBLUE_EX, "I am at your service.", speak_text=True
+        f"{ai_name} 在这里!", Fore.LIGHTBLUE_EX, "我将为您服务.", speak_text=True
     )
 
     # Get AI Role from User
     logger.typewriter_log(
-        "Describe your AI's role: ",
+        "描述下你的AI角色: ",
         Fore.GREEN,
-        "For example, 'an AI designed to autonomously develop and run businesses with"
-        " the sole goal of increasing your net worth.'",
+        "例如，'公司查询人工智能。",
     )
     ai_role = utils.clean_input(f"{ai_name} is: ")
     if ai_role == "":
-        ai_role = "an AI designed to autonomously develop and run businesses with the"
-        " sole goal of increasing your net worth."
+        ai_role = "公司查询人工智能"
 
     # Enter up to 5 goals for the AI
     logger.typewriter_log(
-        "Enter up to 5 goals for your AI: ",
+        "为您的 AI 输入最多 5 个目标： ",
         Fore.GREEN,
-        "For example: \nIncrease net worth, Grow Twitter Account, Develop and manage"
-        " multiple businesses autonomously'",
+        "例如：\n查询市值最高的公司"
+        " 查询市值第二的公司'",
     )
-    print("Enter nothing to load defaults, enter nothing when finished.", flush=True)
+    print("不输入任何内容以加载默认值，完成后不输入任何内容。", flush=True)
     ai_goals = []
     for i in range(5):
         ai_goal = utils.clean_input(f"{Fore.LIGHTBLUE_EX}Goal{Style.RESET_ALL} {i+1}: ")
@@ -61,9 +59,8 @@ def prompt_user() -> AIConfig:
         ai_goals.append(ai_goal)
     if not ai_goals:
         ai_goals = [
-            "Increase net worth",
-            "Grow Twitter Account",
-            "Develop and manage multiple businesses autonomously",
+            "查询市值最高的公司",
+            "查询市值第二的公司",
         ]
 
     return AIConfig(ai_name, ai_role, ai_goals)

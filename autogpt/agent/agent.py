@@ -71,7 +71,7 @@ class Agent:
                 break
 
             # Send message to AI, get response
-            with Spinner("Thinking... "):
+            with Spinner("思考中... "):
                 assistant_reply = chat_with_ai(
                     self.system_prompt,
                     self.triggering_prompt,
